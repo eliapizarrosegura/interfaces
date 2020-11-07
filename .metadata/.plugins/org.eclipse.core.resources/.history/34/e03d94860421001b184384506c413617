@@ -1,0 +1,304 @@
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.event.*;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+public class Interfaces extends JFrame implements ActionListener,ChangeListener{
+//heredamos de una interfaz(implements) los metodos no estan implementados
+//heredamos metodos de una clase JFrame cuyos metodos estan implementados
+	private JLabel label1,label2,label3,label4,label5,label6,label7,label8,label9;
+	private JButton boton1,boton2,boton3,boton4,boton5,boton6,boton7;
+	private JTextField cuadroTexto1,cuadroTexto2,cuadroTexto3;
+	private JTextArea textarea1;
+	private JScrollPane scrollpane1;
+	private JComboBox<String> combo1,combo2,combo3,combo4;
+	private JMenuBar mb;
+	private JMenu menu1,menu2,menu3;
+	private JMenuItem m1,m2,m3,m4;
+	private JCheckBox check1,check2,check3,check4;
+	private JRadioButton rd1,rd2,rd3;
+	private ButtonGroup bg;
+	
+	
+	
+	public Interfaces() {
+//este metodo se carga al iniciar y configura como es nuestro JFrame
+		
+		setLayout(null);
+		label1= new JLabel("El dialogo de Eli");
+        label1.setBounds(10,20,300,30);
+        add(label1);
+        label2 = new JLabel("Version 0.1.0");
+        label2.setBounds(10,900,100,30);
+//pulsa el boton y cierra la ventana
+        add(label2);
+        boton1 = new JButton("Finalizar");
+        boton1.setBounds(10, 850,100, 30);
+        add(boton1);
+        //action listener es poner el boton a la escucha
+        boton1.addActionListener(this);
+//pulsa el boton y ve el nombre del boton en el titulo
+        label3=new JLabel("Ej.pulsa y ve el nombre del boton");
+        label3.setBounds(10,70,300,30);
+        add(label3);
+        boton2=new JButton("2");
+        boton2.setBounds(200,70,100,30);
+        add(boton2);
+        boton2.addActionListener(this);
+//cuadrotexto1 es un textfield donde insertare un texto al presionar boton3
+        label4= new JLabel("Inserta un texto y aparece en el titulo");
+        label4.setBounds(10,115,300,30);
+        add(label4);
+        cuadroTexto1= new JTextField();
+        cuadroTexto1.setBounds(10,150,200,30);
+        add(cuadroTexto1);
+        boton3= new JButton("Insertar texto");
+        boton3.setBounds(230,150,250,30);
+        add(boton3);
+        boton3.addActionListener(this);
+//insertar dos numeros y sumar, ver en el titulo la suma
+        label5= new JLabel("Introduce dos numeros y presiona suamar, aparece en el titulo");
+        label5.setBounds(10,200,450,30);
+        add(label5);
+        cuadroTexto2= new JTextField();
+        cuadroTexto2.setBounds(10,230, 100,30);
+        add(cuadroTexto2);
+        cuadroTexto3 = new JTextField();
+        cuadroTexto3.setBounds(120,230,100,30);
+        add(cuadroTexto3);
+        boton4 = new JButton("Sumar");
+        boton4.setBounds(230,230,100,30);
+        add(boton4);
+        boton4.addActionListener(this);
+//ingresar un texto amplio en un JtextArea con scroll. Poner un botón debajo y saber si se ha introducido un texto
+        textarea1 = new JTextArea();
+        scrollpane1= new JScrollPane(textarea1);
+        scrollpane1.setBounds(10,270,200,200);
+        add(scrollpane1);
+        boton5= new JButton("¿esta el texto argentina?");
+        boton5.setBounds(10,490,200,20);
+        add(boton5);
+        boton5.addActionListener(this);
+//agregar un combobox con colores y poner el color en el titulo
+        combo1= new JComboBox<String>();
+        combo1.setBounds(10,520,100,20);
+        add(combo1);
+        combo1.addItem("Rojo");
+        combo1.addItem("Amarillo");
+        combo1.addItem("Verde");
+        combo1.addActionListener(this);
+//meter los valores numericos de los colores y ponerlo de fondo del botón
+        label6= new JLabel("Rojo");
+        label6.setBounds(10,560,60,20);
+        add(label6);
+        combo2= new JComboBox<String>();
+        combo2.setBounds(100,560,100,20);
+        for(int i=0;i<=255;i++) {
+        	combo2.addItem(String.valueOf(i));
+        }
+        add(combo2);
+        label7= new JLabel("Verde");
+        label7.setBounds(10,590,60,20);
+        add(label7);
+        combo3= new JComboBox<String>();
+        combo3.setBounds(100,590,100,20);
+        for(int i=0;i<=255;i++) {
+        	combo3.addItem(String.valueOf(i));
+        }
+        add(combo3);
+        label8= new JLabel("Azul");
+        label8.setBounds(10,620,60,20);
+        add(label8);
+        combo4= new JComboBox<String>();
+        combo4.setBounds(100,620,100,20);
+        for(int i=0;i<=255;i++) {
+        	combo4.addItem(String.valueOf(i));
+        }
+        add(combo4);
+        boton6= new JButton("cambia el fondo");
+        boton6.setBounds(10,650,200,20);
+        add(boton6);
+        boton6.addActionListener(this);
+//hacer un menu desplegable en la parte superior
+//El menu general es el JMenuBar. La primera pestaña seria JMenu. Los desplegables dentro de la primera pestaña
+//serian m1,m2 y m3
+        mb= new JMenuBar();
+        setJMenuBar(mb);
+        menu1=new JMenu("opciones");
+        mb.add(menu1);
+        menu2=new JMenu("Tamaño ventana");
+        menu1.add(menu2);
+        menu3= new JMenu("Otro");
+        menu1.add(menu3);
+        m4=new JMenuItem("640x280");
+        menu2.add(m4);
+        m1=new JMenuItem("Rojo");
+        m1.addActionListener(this);
+        menu1.add(m1);
+        m2= new JMenuItem("Verde");
+        m2.addActionListener(this);
+        menu1.add(m2);
+        m3=new JMenuItem("Azul");
+        m3.addActionListener(this);
+        menu1.add(m3);
+//Selecciona uno o mas elementos de un checkbox y lo pongo en el titulo. requiere implementar de
+//ChangeListener. Hasta ahora he necesitado ActionListener
+        check1=new JCheckBox("Ingles");
+        check1.setBounds(10,700,100,20);
+        check1.addChangeListener(this);
+        add(check1);
+        check2=new JCheckBox("Alemán");
+        check2.setBounds(10,730,100,20);
+        check2.addChangeListener(this);
+        add(check2);
+        check3=new JCheckBox("LSE");
+        check3.setBounds(10,760,100,20);
+        check3.addChangeListener(this);
+        add(check3);
+// aparece mensaje + check box + boton desactivado, cuando activo check se activa el boton
+        label9=new JLabel("Si estas de acuerdo, haz check y pulsa el boton");
+        label9.setBounds(10,790,400,20);
+        add(label9);
+        check4= new JCheckBox("Acepto");
+        check4.setBounds(10, 810, 100, 20);
+        add(check4);
+        boton7= new JButton("Continuar");
+        boton7.setBounds(150, 810, 100,20);
+        add(boton7);
+        boton7.addChangeListener(this);
+        boton7.setEnabled(false);
+//Hacer un radiobutton que permite solo seleccionar uno de ellos, cuando selecciono uno, se me
+//selecciona otro.
+        bg=new ButtonGroup();
+        rd1= new JRadioButton("opcion 1");
+        rd1.setBounds(300,810,100,20);
+        rd1.addChangeListener(this);
+        add(rd1);
+        bg.add(rd1);
+        rd2= new JRadioButton("opcion 2");
+        rd2.setBounds(300,830,100,20);
+        rd2.addChangeListener(this);
+        add(rd2);
+        bg.add(rd2);
+        rd3= new JRadioButton("opcion 3");
+        rd3.setBounds(300,850,100,20);
+        rd3.addChangeListener(this);
+        add(rd3);
+        bg.add(rd3);
+        
+        
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+//Creamos una variable de tipo container para poder trabajar con todo el contenedor. En función de lo que ha pulsado
+//se podndra un color de fondo u otro.
+		Container f= this.getContentPane();
+		if(e.getSource()==m1) {
+			f.setBackground(new Color(255,0,0));
+		}
+		if(e.getSource()==m2) {
+			f.setBackground(new Color(0,255,0));
+		}
+		if(e.getSource()==m3) {
+			f.setBackground(new Color(0,0,250));
+		}
+		if(e.getSource()==m4) {
+			//redimensionar ventanta
+			setSize(640,480);
+		}
+		
+//preguntamos si el boton se ha ejecutado, es decir si el evento ha ocurrido
+		if(e.getSource()==boton1) {
+			System.exit(0);
+		}
+		if(e.getSource()==boton2) {
+//setTitle heredado de JFrame me permite cambiar el titulo del JFrame
+			setTitle("boton 2");
+		}
+//al presionar el boton 3 extraigo el texto del textFiled y se lo pongo en el titulo
+		if(e.getSource()==boton3) {
+			String insert=cuadroTexto1.getText();
+			setTitle(insert);
+		}
+//al presionar el boton 4 sumo los numeros y lo pongo en el titulo (p.58 u1)
+		if(e.getSource()==boton4) {
+			int sum1=Integer.parseInt(cuadroTexto2.getText());
+			int sum2=Integer.parseInt(cuadroTexto3.getText());
+			int suma= sum1+sum2;
+			String total=String.valueOf(suma);
+			setTitle(total);
+		}
+		if(e.getSource()==boton5) {
+			String texto=textarea1.getText();
+			if(texto.indexOf("argentina")!=-1) {
+				setTitle("si contine argentina");
+			}else {
+				setTitle("no contiene argentina");
+			}
+		}
+		if(e.getSource()==combo1) {
+			String seleccion=(String) combo1.getSelectedItem();
+			setTitle(seleccion);
+		}
+		if(e.getSource()==boton6) {
+			
+			int colorRojo= Integer.parseInt((String) combo2.getSelectedItem());
+			int colorVerde= Integer.parseInt((String) combo3.getSelectedItem());
+			int colorAzul= Integer.parseInt((String) combo4.getSelectedItem());
+			Color color= new Color(colorRojo,colorVerde,colorAzul);
+			boton6.setBackground(color);
+		}
+	}
+	
+	public void stateChanged(ChangeEvent l) {
+		String cad ="";
+		if(check1.isSelected()==true) {
+			cad = cad + "Inglés";
+		}
+		if(check2.isSelected()==true) {
+			cad = cad + "Alemán";
+		}
+		if(check3.isSelected()==true) {
+			cad = cad + "LSE";
+		}
+		setTitle(cad);
+		if(check4.isSelected()==true) {
+			boton7.setEnabled(true);
+			System.out.println("hola");
+			setTitle("Confirmado");
+		}
+		if(rd1.isSelected()) {
+			setTitle("opcion1");
+		}
+		if(rd2.isSelected()) {
+			setTitle("opcion2");
+		}
+		if(rd3.isSelected()) {
+			setTitle("opcion3");
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		/** Cuidado, instanciare JFrame() cuando no tenga el metodo Interfaces() para generar un 
+		Jframe sin las caracteristicas de arriba. Una vez defino ese metodo al que instancio siempre que
+		se ejecute el main, ya no necesito convocar un JFrame
+		//JFrame f= new JFrame();
+		**/
+		
+		Interfaces f= new Interfaces();
+        // posicion x, posicion y, ancho y alto
+        f.setBounds(0,0,700,1000);
+        //nos permite ver la ventana
+        f.setVisible(true);
+        //tamaño de la ventana no modificable en tiempo de ejecución
+        //f.setResizable(false);
+        //la ventana se cerrara cuando el usuario pusle x
+        System.out.print(3);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+}
